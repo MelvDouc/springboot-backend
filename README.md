@@ -34,6 +34,29 @@
 
 ## Syntax
 
+### Controllers
+
+#### Create
+
+In MyApplication.java folder:
+
+```java
+package com.springboot.project1;
+
+// import org.springframework.stereotype.Controller;
+// import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+    @GetMapping("/")
+    public String home() {
+        return "Home Page";
+    }
+}
+```
+
 ### Annotations
 
 #### @SpringBootApplication
@@ -68,28 +91,5 @@ Set HTTP method.
 @PostMapping
 public ResponseEntity<User> saveUser(@RequestBody User user) {
     return new ResponseEntity<>(this.userUservice.saveUser(user), HttpStatus.CREATED);
-}
-```
-
-### Controllers
-
-#### Create
-
-In MyApplication.java folder:
-
-```java
-package com.springboot.project1;
-
-// import org.springframework.stereotype.Controller;
-// import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class MyController {
-    @GetMapping("/hello-world")
-    public String helloWorld() {
-        return "Hello World!";
-    }
 }
 ```
