@@ -23,9 +23,14 @@
 
 ### Dependencies
 
+#### Maven
 - pom.xml -> project.dependencies[() => artifactId ===
   "spring-boot-starter"].artifactId += "-web"
 - click "Load Maven changes" floating button
+
+#### Gradle
+
+- /External Libraries
 
 ## Syntax
 
@@ -49,22 +54,21 @@ Use class as a rest controller.
 - on a controller method:
 
 ```java
-    @RequestMapping(value="{id}", method=RequestMethod.GET)
-    public ResponseEntity<User> getUser(@PathVariable long id) {
-        return new ResponseEntity<>(this.userService.findById(id), HttpStatus.OK);
-    }
+@RequestMapping(value="{id}", method=RequestMethod.GET)
+public ResponseEntity<User> getUser(@PathVariable long id) {
+    return new ResponseEntity<>(this.userService.findById(id), HttpStatus.OK);
+}
 ```
 
 #### @(Get|Post|etc...)Mapping
 
-- Set HTTP method.
+Set HTTP method.
 
 ```java
 @PostMapping
 public ResponseEntity<User> saveUser(@RequestBody User user) {
     return new ResponseEntity<>(this.userUservice.saveUser(user), HttpStatus.CREATED);
 }
-
 ```
 
 ### Controllers
