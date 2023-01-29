@@ -21,13 +21,18 @@ public class EmployeeController {
 
     @RequestMapping(value="{id}", method=RequestMethod.GET)
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") long id) {
-        return new ResponseEntity<>(employeeService.findEmployeeById(id), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.findEmployee(id), HttpStatus.OK);
     }
 
     @GetMapping
     public List<Employee> getEmployees() {
         return employeeService.findEmployees();
     }
+
+    /* @GetMapping
+    public List<Employee> getEmployees(@RequestParam("order-asc") int orderAsc) {
+        return employeeService.findEmployees(orderAsc == 1);
+    } */
 
     @PostMapping
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
@@ -40,5 +45,10 @@ public class EmployeeController {
         @RequestBody Employee employee
     ) {
         return new ResponseEntity<>(employeeService.updateEmployee(employee, id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="{id}", method=RequestMethod.DELETE)
+    public ResponseEntity<Boolean> deleteEmployee(@PathVariable("id") long id) {
+        return new ResponseEntity<>(employeeService.deleteEmployee(id), HttpStatus.OK);
     }
 }

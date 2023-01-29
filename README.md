@@ -19,7 +19,7 @@
 - --> src/main/com.project1.subproject1/MySubprojectApplication.java
   - right-click and "Run MySubprojectApplication.main()"
 
-- [tutorial](https://youtu.be/slTUtTSwRKU?t=9205)
+- [tutorial](https://youtu.be/slTUtTSwRKU?t=11581)
 
 ### Dependencies
 

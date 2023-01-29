@@ -12,7 +12,11 @@ import java.util.Optional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee findEmployeeById(long id) throws ResourceNotFoundException {
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    public Employee findEmployee(long id) throws ResourceNotFoundException {
         Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isPresent())
             return employee.get();
@@ -20,19 +24,21 @@ public class EmployeeService {
     }
 
     public List<Employee> findEmployees() {
-        return this.employeeRepository.findAll();
+        return employeeRepository.findAll();
     }
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    /* public List<Employee> findEmployees(boolean orderAsc) {
+        if (orderAsc)
+            return employeeRepository.findAllByOrderByIdAsc();
+        return findEmployees();
+    } */
 
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
     public Employee updateEmployee(Employee employee, long id) {
-        Employee employeeInDb = findEmployeeById(id);
+        Employee employeeInDb = findEmployee(id);
         String firstName = employee.getFirstName();
         String lastName = employee.getLastName();
         String email = employee.getEmail();
@@ -45,5 +51,15 @@ public class EmployeeService {
             employeeInDb.setEmail(email);
 
         return employeeRepository.save(employeeInDb);
+    }
+
+    public boolean deleteEmployee(long id) {
+        Optional<Employee> employeeInDb = employeeRepository.findById(id);
+
+        if (employeeInDb.isEmpty())
+            return false;
+
+        employeeRepository.deleteById(id);
+        return true;
     }
 }
